@@ -1,7 +1,9 @@
 setup.cfg
 setup.py
 DocxMerge/DocxMerge.py
+DocxMerge/__init__.py
 DocxMerge.egg-info/PKG-INFO
 DocxMerge.egg-info/SOURCES.txt
 DocxMerge.egg-info/dependency_links.txt
+DocxMerge.egg-info/requires.txt
 DocxMerge.egg-info/top_level.txt
