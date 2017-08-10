@@ -1,0 +1,12 @@
+Metadata-Version: 1.1
+Name: DocxMerge
+Version: 0.1
+Summary: A simple library for merging Microsoft Word Documents.
+Home-page: https://github.com/TheRobotCarlson/DocxMerge
+Author: Brian Carlson
+Author-email: briancarlson6174@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/TheRobotCarlson/DocxMerge/archive/0.1.tar.gz
+Description: UNKNOWN
+Keywords: docx,merge,word
+Platform: UNKNOWN
