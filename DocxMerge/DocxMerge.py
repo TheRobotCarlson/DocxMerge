@@ -1,7 +1,8 @@
 from difflib import ndiff, SequenceMatcher
 import string
-from docx import Document
+from docx import Document as RetDoc
 from shutil import copyfile
+from docx.document import Document
 
 
 def get_diffs_from_seq(text_a, text_b):
@@ -160,7 +161,11 @@ def get_merge(text_list_a, text_list_b):
 
 
 def load_doc(file):
-    document = Document(file)
+    if isinstance(file, Document):
+        document = file
+    else:
+        document = RetDoc(file)
+
     paragraphs = list(document.paragraphs)
 
     text_list = []
@@ -255,7 +260,7 @@ def merge_docs(pivot_doc, final_doc, docs):
 
     merged_changes = merge_text(final_changes)
 
-    document4 = Document(final_doc)
+    document4 = RetDoc(final_doc)
 
     for paragraph in list(document4.paragraphs):
         paragraph_text = paragraph.text
@@ -264,3 +269,25 @@ def merge_docs(pivot_doc, final_doc, docs):
         paragraph.text = merged_changes[paragraph_text]
 
     document4.save(final_doc)
+
+
+def replace_doc_text(file, replacements):
+    document = Document(file)
+    paragraphs = document.paragraphs
+
+    changes = False
+
+    for paragraph in paragraphs:
+        text = paragraph.text
+        for original, replace in replacements.items():
+            if original in replace and replace in text:
+                continue
+            if original in text:
+                changes = True
+                text = text.replace(original, replace)
+                paragraph.text = text
+
+    if changes:
+        print("changing {}".format(file))
+
+    document.save(file)
